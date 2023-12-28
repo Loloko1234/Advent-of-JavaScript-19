@@ -7,6 +7,8 @@ function App() {
   const [passwordLogic, setPasswordLogic] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [confirmPasswordLogic, setConfirmPasswordLogic] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   function validateEmail(email) {
     const re =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -93,16 +95,21 @@ function App() {
           </div>
         )}
       </div>
-      <div className="field">
+      <div className={showPassword ? "field show" : "field"}>
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           name="password"
-          id="password"
-          placeholder=" "
           onChange={handleInputChange}
+          placeholder="Password"
         />
         <label for="password">Password</label>
-        <button className="show-hide"></button>
+        <button
+          className="show-hide"
+          onClick={(event) => {
+            event.preventDefault();
+            setShowPassword(!showPassword);
+          }}
+        ></button>
         {password === undefined || password === null || password === true ? (
           <div className="error">
             <img src="./error.svg" alt="Error" />
@@ -117,16 +124,21 @@ function App() {
           </div>
         )}
       </div>
-      <div className="field show">
+      <div className={showConfirmPassword ? "field show" : "field"}>
         <input
-          type="text"
+          type={showConfirmPassword ? "text" : "password"}
           name="confirm-password"
-          id="confirm-password"
-          placeholder=" "
           onChange={handleInputChange}
+          placeholder="Confirm Password"
         />
         <label for="confirm-password">Confirm Password</label>
-        <button className="show-hide"></button>
+        <button
+          className="show-hide"
+          onClick={(event) => {
+            event.preventDefault();
+            setShowConfirmPassword(!showConfirmPassword);
+          }}
+        ></button>
         {confirmPassword === false ? (
           <div className="error">
             <img src="./error.svg" alt="Error" />
